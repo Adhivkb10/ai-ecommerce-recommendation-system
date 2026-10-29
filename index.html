@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopWise Recommendations</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      color: #18352d;
+      background: #f4f7f2;
+    }
+
+    header, main {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 20px;
+      background: #174d40;
+      color: white;
+      border-radius: 12px;
+    }
+
+    h1 { margin: 0 0 8px; }
+    section { margin-top: 32px; }
+
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .card {
+      width: 220px;
+      padding: 18px;
+      background: white;
+      border: 1px solid #dce5dc;
+      border-radius: 12px;
+    }
+
+    .card h3 { margin-top: 0; }
+
+    button {
+      padding: 10px 14px;
+      border: 0;
+      border-radius: 8px;
+      color: white;
+      background: #28745d;
+      cursor: pointer;
+    }
+
+    button:hover { background: #174d40; }
+
+    #message {
+      color: #52665c;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ShopWise</h1>
+    <p>Product recommendations based on what you view.</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Recommended for you</h2>
+      <div id="recommendations" class="products">
+        <p>View a product below to get a recommendation.</p>
+      </div>
+      <p id="message">Your activity stays in this demo page.</p>
+    </section>
+
+    <section>
+      <h2>Explore products</h2>
+      <div class="products">
+        <article class="card">
+          <h3>Running Shoes</h3>
+          <p>Category: Running</p>
+          <p>$84</p>
+          <button onclick="viewProduct('Running Shoes', 'running')">View product</button>
+        </article>
+
+        <article class="card">
+          <h3>Sports Watch</h3>
+          <p>Category: Fitness</p>
+          <p>$119</p>
+          <button onclick="viewProduct('Sports Watch', 'fitness')">View product</button>
+        </article>
+
+        <article class="card">
+          <h3>Running Socks</h3>
+          <p>Category: Running</p>
+          <p>$18</p>
+          <button onclick="viewProduct('Running Socks', 'running')">View product</button>
+        </article>
+
+        <article class="card">
+          <h3>Water Bottle</h3>
+          <p>Category: Fitness</p>
+          <p>$26</p>
+          <button onclick="viewProduct('Water Bottle', 'fitness')">View product</button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let viewedCategory = "";
+
+    function viewProduct(name, category) {
+      viewedCategory = category;
+
+      const suggestions = viewedCategory === "running"
+        ? ["Running Socks", "Sports Watch"]
+        : ["Water Bottle", "Running Shoes"];
+
+      document.getElementById("recommendations").innerHTML =
+        suggestions.map(item =>
+          `<article class="card"><h3>${item}</h3><p>Suggested because you viewed a ${category} product.</p></article>`
+        ).join("");
+
+      document.getElementById("message").textContent =
+        `You viewed ${name}. Recommendations have been updated.`;
+    }
+  </script>
+</body>
+</html>
